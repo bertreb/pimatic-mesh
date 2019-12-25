@@ -1,2 +1,2 @@
 # pimatic-mesh
-A plugin for connecting pimatic systems
+A plugin for interconnecting pimatic systems
