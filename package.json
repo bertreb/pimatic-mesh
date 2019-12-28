@@ -1,0 +1,54 @@
+{
+  "name": "pimatic-mesh",
+  "description": "Pimatic Plugin to control devices of a remote Pimatic systems",
+  "author": {
+    "name": "Bert Gierveld",
+    "url": "https://github.com/bertreb"
+  },
+  "main": "mesh",
+  "files": [
+    "mesh.coffee",
+    "mesh-connections.coffee",
+    "mesh-config-schema.coffee",
+    "device-config-schema.coffee",
+    "devices/mesh-contact",
+    "devices/mesh-dimmer",
+    "devices/mesh-switch",
+    "devices/mesh-variables",
+    "devices/mesh-temperature",
+    "devices/mesh-presence",
+    "LICENSE",
+    "HISTORY.md",
+    "README.md"
+  ],
+  "keywords": [
+    "meshing",
+    "Pimatic"
+  ],
+  "version": "0.0.1",
+  "homepage": "https://github.com/bettreb/pimatic-mesh/tree/master",
+  "private": false,
+  "bugs": {
+    "url": "https://github.com/mwittig/pimatic-mesh/issues"
+  },
+  "license": "MIT",
+  "maintainers": [
+    {
+      "name": "bertreb",
+      "url": "https://github.com/bertreb"
+    }
+  ],
+  "configSchema": "mesh-config-schema.coffee",
+  "dependencies": {
+    "pimatic-plugin-commons": "^0.8.8",
+    "socket.io-client": "^1.4.5"
+  },
+  "optionalDependencies": {},
+  "peerDependencies": {
+    "pimatic": ">=0.8.0 <1.0.0"
+  },
+  "engines": {
+    "node": ">=4",
+    "npm": ">1.1.x"
+  }
+}
