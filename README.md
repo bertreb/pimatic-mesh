@@ -12,7 +12,7 @@ There are two typical use cases for this plugin
 
 The pimatic remote systems can be configured in the plugin config. Per remote you need to configure the following parameters.
 
-* id: A name for the remote system that is used in the mesh device setup
+* id: name for the remote system that is used in the mesh device setup
 * url: the url of the remote system
 * username: the Pimatic username for the remote system
 * password: the Pimatic password for the remote system
@@ -27,25 +27,21 @@ For example.
 You configure the plugin for the remote Pimatic and 'id' it as 'pimatic1'. You want the data of an Luftdaten device on that remote system. The device id is 'airquality-outside-home' and the attributes you want are 'PM10' and 'PM25'.
 You create a mesh variables device with the following config.
 
-  "id": "air-quality",
-  "name": "air quality",
-  "class": "PimaticRemoteVariables"
-  "remotePimatic": "pimatic1",
-  "variables": [
-    {
-      "name": "pm10",
-      "remoteDeviceId": "airquality-outside-home",
-      "remoteAttributeId": "PM10",
-      "type": "number"
-    }
-    {
-      "name": "pm25",
-      "remoteDeviceId": "airquality-outside-home",
-      "remoteAttributeId": "PM25",
-      "type": "number"
-    }
-  ],
-  "xAttributeOptions": []
+- "id": "air-quality",
+- "name": "air quality",
+- "class": "PimaticRemoteVariables"
+- "remotePimatic": "pimatic1",
+- "variables":
+    "name": "pm10",
+    "remoteDeviceId": "airquality-outside-home",
+    "remoteAttributeId": "PM10",
+    "type": "number"
+
+    "name": "pm25",
+    "remoteDeviceId": "airquality-outside-home",
+    "remoteAttributeId": "PM25",
+    "type": "number"
+- "xAttributeOptions": []
 
 Now you created a mesh device with the id "air-quality" and the attributes "pm10" and "pm25".
 The pm10 and pm25 data will come from the remote system and will become visible as soon as the remote systems values change.
