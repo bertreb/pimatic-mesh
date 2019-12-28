@@ -12,10 +12,10 @@ There are two typical use cases for this plugin
 
 The pimatic remote systems can be configured in the plugin config. Per remote you need to configure the following parameters.
 
-- id: A name for the remote system that is used in the mesh device setup
-- url: the url of the remote system
-- username: the Pimatic username for the remote system
-- password: the Pimatic password for the remote system
+* id: A name for the remote system that is used in the mesh device setup
+* url: the url of the remote system
+* username: the Pimatic username for the remote system
+* password: the Pimatic password for the remote system
 
 
 Per mesh device you can choose which remote Pimatic system is used (via the 'id').
