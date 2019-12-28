@@ -26,10 +26,10 @@
     "Pimatic"
   ],
   "version": "0.0.1",
-  "homepage": "https://github.com/bettreb/pimatic-mesh/tree/master",
+  "homepage": "https://github.com/bertreb/pimatic-mesh/tree/master",
   "private": false,
   "bugs": {
-    "url": "https://github.com/mwittig/pimatic-mesh/issues"
+    "url": "https://github.com/bertreb/pimatic-mesh/issues"
   },
   "license": "MIT",
   "maintainers": [
