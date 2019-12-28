@@ -1,6 +1,6 @@
 # pimatic-mesh
 A plugin for interconnecting pimatic systems.
-This plugin is based on pimatic-remote from mwittig (https://github.com/mwittig/pimatic-remote) and is extended with devices and a multi-remote capability.
+This plugin is based on pimatic-remote from [mwittig](https://github.com/mwittig/pimatic-remote) and is extended with devices and a multi-remote capability.
 
 The pimatic-mesh plugin connects one or more remote Pimatic systems to the Pimatic system of this plugin.
 In the plugin the most common devices are supported.
