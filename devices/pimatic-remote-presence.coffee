@@ -19,10 +19,10 @@ module.exports = (env) ->
       @_base.debug "initializing:", util.inspect(@config) if @debug
       @id = @config.id
       @name = @config.name
-      @mesh = @plugin.mesh.remotes[@config.remotePimatic].socket
+      #@mesh = @plugin.mesh.remotes[@config.remotePimatic].socket
       super()
 
-      @mesh.on @config.remoteDeviceId, (event) =>
+      @plugin.mesh.on @config.remoteDeviceId, (event) =>
         @emit event.attributeName, event.value
 
     getPresence: () ->

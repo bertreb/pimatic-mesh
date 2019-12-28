@@ -19,12 +19,14 @@ module.exports = (env) ->
       @_base.debug "initializing:", util.inspect(@config) if @debug
       @id = @config.id
       @name = @config.name
+      env.logger.info "lastState switch: " + JSON.stringify(lastState)
+      @_state = lastState.state.value
 
       env.logger.info "remotePimatic: " + @remotePimatic
-      @mesh = @plugin.mesh.remotes[@config.remotePimatic].socket
+      #@mesh = @plugin.mesh.remotes[@config.remotePimatic].socket
       super()
 
-      @mesh.on @config.remoteDeviceId, (event) =>
+      @plugin.mesh.on @config.remoteDeviceId, (event) =>
         @emit event.attributeName, event.value
 
     getState: () ->

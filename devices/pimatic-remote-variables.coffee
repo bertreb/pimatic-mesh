@@ -23,11 +23,14 @@ module.exports = (env) ->
       #env.logger.info "socketID: " + @mesh.id
       @attributes = {}
       @values = {}
+      env.logger.info "lastState: " + JSON.stringify(lastState)
 
       for variable in @config.variables
         do (variable) =>
           name = variable.name
           info = null
+
+          @values[variable.name] = lastState[variable.name].value
 
           if @attributes[name]?
             throw new Error(
