@@ -21,13 +21,14 @@ The pimatic remote systems can be configured in the plugin config. Per remote yo
 }
 ```
 
-Per mesh device you can choose which remote Pimatic system is used (via the 'id').
+Per mesh device you can choose which remote Pimatic system will be used (via the 'id').
 
-The supported mesh devices are switch, contact, dimmer, presence, temperature and variable. The remote switch and dimmer can be controlled from the switch and dimmer mesh device. From all devices you get data like state, level, etc, depending on the devicetype.
+The supported mesh devices are switch, contact, dimmer, presence, temperature and variable. The remote switch and dimmer can be controlled from the switch and dimmer mesh device. From all devices you get data like state, level, etc, depending on the device type.
 Variables from remote devices can be obtained via the mesh variables device.
 
-For example.
-You configure the plugin for the remote Pimatic and 'id' it as 'pimatic1'. You want the data of an Luftdaten device on that remote system. The device id is 'airquality-outside-home' and the attributes you want are 'PM10' and 'PM25'.
+An example.
+You configured the plugin for the remote Pimatic and 'id' it as 'pimatic1'.
+You want the data of a Luftdaten device from that remote system. The device id is 'airquality-outside-home' and the attributes you want are 'PM10' and 'PM25'.
 You create a mesh variables device with the following config.
 
 ```
