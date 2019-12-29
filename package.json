@@ -1,6 +1,6 @@
 {
   "name": "pimatic-mesh",
-  "description": "Pimatic Plugin to control devices of a remote Pimatic systems",
+  "description": "Pimatic Plugin to control devices of remote Pimatic systems",
   "author": {
     "name": "Bert Gierveld",
     "url": "https://github.com/bertreb"
