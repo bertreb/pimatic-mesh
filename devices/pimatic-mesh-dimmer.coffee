@@ -19,7 +19,6 @@ module.exports = (env) ->
       @_state = lastState?.state?.value or off
       @_dimlevel = lastState?.dimlevel?.value or 0
 
-      env.logger.info "@mesh: " + @mesh
       super()
 
       @plugin.remotes[@remotePimatic].on @remoteDevice, (event) =>
