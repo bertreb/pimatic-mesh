@@ -5,13 +5,8 @@ module.exports = (env) ->
   util = require 'util'
   commons = require('pimatic-plugin-commons')(env)
 
-  # Device class representing an UniPi relay switch
   class PimaticRemoteDimmer extends env.devices.DimmerActuator
 
-    # Create a new PimaticRemoteSwitch device
-    # @param [Object] config    device configuration
-    # @param [PimaticRemotePlugin] plugin   plugin instance
-    # @param [Object] lastState state information stored in database
     constructor: (@config, @plugin, lastState) ->
       @debug = @plugin.config.debug ? @plugin.config.__proto__.debug
       @_base = commons.base @, @config.class
