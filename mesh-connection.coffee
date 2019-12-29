@@ -26,8 +26,8 @@ module.exports = (env) ->
 
       @socket = io url.resolve @baseUrl, '/?username=' + @username + '&password=' + @password, {
         reconnection: true,
-        reconnectionDelay: 1000,
-        reconnectionDelayMax: 3000,
+        reconnectionDelay: 5000,
+        reconnectionDelayMax: 10000,
         timeout: 20000,
         forceNew: true
       }
@@ -49,12 +49,12 @@ module.exports = (env) ->
         @connectError = "connection closed" if @connectError?
 
       @socket.on 'connect_error', (error) =>
-        @base.error "connection attempt to remote peer failed:", error
+        @base.error "connection attempt to remote peer failed" #, error
         @connected = false
         @connectError = error
 
       @socket.on 'error', (error) =>
-        @base.error "connection to remote peer failed:", error
+        @base.error "connection to remote peer failed" # , error
         @connected = false
         @connectError = error
 
