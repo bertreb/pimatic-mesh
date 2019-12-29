@@ -6,38 +6,38 @@ module.exports = (env) ->
   commons = require('pimatic-plugin-commons')(env)
   deviceConfigTemplates = {
     "switch": {
-      id: "remote-switch-"
-      name: "Remote Switch "
-      class: "PimaticRemoteSwitch"
+      id: "mesh-switch-"
+      name: "Mesh Switch "
+      class: "PimaticMeshSwitch"
     },
     "presence": {
-      id: "remote-presence-"
-      name: "Remote Presence "
-      class: "PimaticRemotePresence"
+      id: "mesh-presence-"
+      name: "Mesh Presence "
+      class: "PimaticMeshPresence"
     },
     "contact": {
-      id: "remote-contact-"
-      name: "Remote Contact "
-      class: "PimaticRemoteContact"
+      id: "mesh-contact-"
+      name: "Mesh Contact "
+      class: "PimaticMeshContact"
     },
     "temperature": {
-      id: "remote-temperature-"
-      name: "Remote Temperature "
-      class: "PimaticRemoteTemperature"
+      id: "mesh-temperature-"
+      name: "Mesh Temperature "
+      class: "PimaticMeshTemperature"
     },
     "dimmer": {
-      id: "remote-dimmer-"
-      name: "Remote Dimmer "
-      class: "PimaticRemoteDimmer"
+      id: "mesh-dimmer-"
+      name: "Mesh Dimmer "
+      class: "PimaticMeshDimmer"
     },
     "variables": {
-      id: "remote-variables-"
-      name: "Remote variables "
-      class: "PimaticRemoteVariables"
+      id: "mesh-variables-"
+      name: "Mesh Variables "
+      class: "PimaticMeshVariables"
     }
   }
 
-  # ###PimaticRemotePlugin class
+  # ###PimaticMeshPlugin class
   class PimaticMeshPlugin extends env.plugins.Plugin
 
     init: (app, @framework, @config) =>
@@ -45,7 +45,6 @@ module.exports = (env) ->
       @remotes = {}
       for remoteConfig in @config.remotes
         @remotes[remoteConfig.id] = new Mesh(remoteConfig, @)
-        env.logger.info "remote: " + remoteConfig.id + " added, aantal remotes: " + _.size(@remotes)
       @debug = @config.debug || false
       @base = commons.base @, 'Plugin'
       @varMgr = @framework.variableManager
@@ -70,7 +69,7 @@ module.exports = (env) ->
       @framework.deviceManager.on('discover', (eventData) =>
         @framework.deviceManager.discoverMessage 'pimatic-mesh', 'Searching for devices'
         for key,remote of @remotes
-          env.logger.info "Remote '#{remote.pimaticId}', '#{_.size(remote.getDevices())}' devices discovered"
+          env.logger.info "Mesh'#{remote.pimaticId}', '#{_.size(remote.getDevices())}' devices discovered"
       )
 
       @framework.on 'destroy', () =>

@@ -1,8 +1,8 @@
 module.exports = {
   title: "pimatic-remotes device config schemas"
-  PimaticRemoteSwitch: {
-    title: "Remote Switch"
-    description: "Remote Switch"
+  PimaticMeshSwitch: {
+    title: "Mesh Switch"
+    description: "Mesh SwitchDevice"
     type: "object"
     extensions: ["xLink", "xOnLabel", "xOffLabel"]
     properties:
@@ -14,9 +14,9 @@ module.exports = {
         description: "The id of the remote switch device"
         type: "string"
   },
-  PimaticRemotePresence: {
-    title: "Remote Presence"
-    description: "Remote Presence"
+  PimaticMeshPresence: {
+    title: "Mesh Presence"
+    description: "Mesh PresenceDevice"
     type: "object"
     extensions: ["xLink", "xPresentLabel", "xAbsentLabel"]
     properties:
@@ -28,9 +28,9 @@ module.exports = {
         description: "The id of the remote presence sensor"
         type: "string"
   },
-  PimaticRemoteContact: {
-    title: "Remote Contact"
-    description: "Remote Contact"
+  PimaticMeshContact: {
+    title: "Mesh Contact"
+    description: "Mesh ContactDevice"
     type: "object"
     extensions: ["xLink", "xOpenedLabel", "xClosedLabel"]
     properties:
@@ -42,9 +42,9 @@ module.exports = {
         description: "The id of the remote contact sensor"
         type: "string"
   },
-  PimaticRemoteTemperature: {
-    title: "Remote Temperature"
-    description: "Remote Temperature"
+  PimaticMeshTemperature: {
+    title: "Mesh TemperatureDevice"
+    description: "Mesh Temperature"
     type: "object"
     extensions: ["xLink", "xAttributeOptions"]
     properties:
@@ -56,9 +56,9 @@ module.exports = {
         description: "The id of the remote temperature sensor"
         type: "string"
   },
-  PimaticRemoteDimmer: {
-    title: "Remote Dimmer"
-    description: "Remote Dimmer"
+  PimaticMeshDimmer: {
+    title: "Mesh Dimmer"
+    description: "Mesh DimmerDevice"
     type: "object"
     extensions: ["xLink"]
     properties:
@@ -70,8 +70,8 @@ module.exports = {
         description: "The id of the remote dimmer"
         type: "string"
   },
-  PimaticRemoteVariables: {
-    title: "VariablesDevice config"
+  PimaticMeshVariables: {
+    title: "Mesh VariablesDevice"
     type: "object"
     extensions: ["xLink", "xAttributeOptions"]
     properties:

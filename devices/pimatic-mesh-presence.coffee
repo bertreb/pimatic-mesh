@@ -5,7 +5,7 @@ module.exports = (env) ->
   util = require 'util'
   commons = require('pimatic-plugin-commons')(env)
 
-  class PimaticRemotePresence extends env.devices.PresenceSensor
+  class PimaticMeshPresence extends env.devices.PresenceSensor
 
     constructor: (@config, @plugin, lastState) ->
       @debug = @plugin.config.debug ? @plugin.config.__proto__.debug

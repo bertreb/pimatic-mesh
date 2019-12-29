@@ -5,7 +5,7 @@ module.exports = (env) ->
   util = require 'util'
   commons = require('pimatic-plugin-commons')(env)
 
-  class PimaticRemoteVariables extends env.devices.Device
+  class PimaticMeshVariables extends env.devices.Device
 
     constructor: (@config, @plugin, lastState) ->
       @id = @config.id

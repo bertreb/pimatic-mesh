@@ -5,7 +5,7 @@ module.exports = (env) ->
   util = require 'util'
   commons = require('pimatic-plugin-commons')(env)
 
-  class PimaticRemoteContact extends env.devices.ContactSensor
+  class PimaticMeshTemperature extends env.devices.TemperatureSensor
 
     constructor: (@config, @plugin, lastState) ->
       @debug = @plugin.config.debug ? @plugin.config.__proto__.debug
@@ -16,20 +16,20 @@ module.exports = (env) ->
       @name = @config.name
       @remotePimatic = @config.remotePimatic
       @remoteDevice = @config.remoteDeviceId
-      @_contact = lastState?.contact?.value or off
+      @_temperature = lastState?.temperature?.value or 0
       super()
 
-      @plugin.remotes[@remotePimatic].on @remoteDevice, (event) =>
+      @plugin.remotes[@remotePimatic].on @remoteDeviceId, (event) =>
         @emit event.attributeName, event.value
 
-    getContact: () ->
-      return Promise.resolve @_contact
+    getTemperature: () ->
+      return Promise.resolve @_temperature
 
-    setContact: (value) ->
-      @_base.debug 'set contact:', value
+    setTemperature: (value) ->
+      @_base.debug 'set temperature:', value
 
-      @plugin.remotes[@remotePimatic].action @remoteDevice, "contact", {
-        contact: value
+      @plugin.remotes[@remotePimatic].action @remoteDeviceId, "temperature", {
+        temperature: value
       }
 
     destroy: () =>
