@@ -34,32 +34,32 @@ module.exports = (env) ->
       super()
 
       @socket.on 'connect', () =>
-        @base.debug "connected"
+        @base.debug "connected to '#{@pimaticId}'"
         @connected = true
         @connectError = null
 
       @socket.on 'reconnect', (noAttempts) =>
-        @base.debug "reconnected"
+        @base.debug "reconnected to '#{@pimaticId}'"
         @connected = true
         @connectError = null
 
       @socket.on 'disconnect', () =>
         @base.debug 'disconnected'
         @connected = false
-        @connectError = "connection closed" if @connectError?
+        @connectError = "connection remote '#{@pimaticId} closed" if @connectError?
 
       @socket.on 'connect_error', (error) =>
-        @base.error "connection attempt to remote peer failed" #, error
+        @base.error "connection attempt to remote '#{@pimaticId}' failed" #, error
         @connected = false
         @connectError = error
 
       @socket.on 'error', (error) =>
-        @base.error "connection to remote peer failed" # , error
+        @base.error "connection to remote '#{@pimaticId}' failed" # , error
         @connected = false
         @connectError = error
 
       @socket.on 'devices', (devices) =>
-        @base.debug "remote devices received"
+        @base.debug "remote devices received from '#{@pimaticId}'"
         @remoteDevices = devices
 
       @socket.on 'hello', (user) =>
