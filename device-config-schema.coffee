@@ -9,7 +9,6 @@ module.exports = {
       remotePimatic:
         description: "The id of the remote Pimatic"
         type: "string"
-        default: "default"
       remoteDeviceId:
         description: "The id of the remote switch device"
         type: "string"
@@ -23,7 +22,6 @@ module.exports = {
       remotePimatic:
         description: "The id of the remote Pimatic"
         type: "string"
-        default: "default"
       remoteDeviceId:
         description: "The id of the remote presence sensor"
         type: "string"
@@ -37,7 +35,6 @@ module.exports = {
       remotePimatic:
         description: "The id of the remote Pimatic"
         type: "string"
-        default: "default"
       remoteDeviceId:
         description: "The id of the remote contact sensor"
         type: "string"
@@ -51,7 +48,6 @@ module.exports = {
       remotePimatic:
         description: "The id of the remote Pimatic"
         type: "string"
-        default: "default"
       remoteDeviceId:
         description: "The id of the remote temperature sensor"
         type: "string"
@@ -65,7 +61,6 @@ module.exports = {
       remotePimatic:
         description: "The id of the remote Pimatic"
         type: "string"
-        default: "default"
       remoteDeviceId:
         description: "The id of the remote dimmer"
         type: "string"
@@ -78,7 +73,6 @@ module.exports = {
       remotePimatic:
         description: "The id of the remote Pimatic"
         type: "string"
-        default: "default"
       variables:
         description: "Variables to display"
         type: "array"

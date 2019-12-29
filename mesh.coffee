@@ -43,14 +43,17 @@ module.exports = (env) ->
     init: (app, @framework, @config) =>
       
       @remotes = {}
+      @enumRemotes = []
       for remoteConfig in @config.remotes
         @remotes[remoteConfig.id] = new Mesh(remoteConfig, @)
+        @enumRemotes.push remoteConfig.id
       @debug = @config.debug || false
       @base = commons.base @, 'Plugin'
       @varMgr = @framework.variableManager
 
       # register devices
       deviceConfigDef = require("./device-config-schema")
+
       for key, device of deviceConfigTemplates
         do (key, device) =>
           className = device.class
@@ -59,6 +62,7 @@ module.exports = (env) ->
           env.logger.info "classType: " + './devices/' + filename
           classType = require('./devices/' + filename)(env)
           @base.debug "Registering device class #{className}"
+          deviceConfigDef[className].properties.remotePimatic["enum"] = @enumRemotes
           @framework.deviceManager.registerDeviceClass(className, {
             configDef: deviceConfigDef[className],
             createCallback: (config, lastState) =>
