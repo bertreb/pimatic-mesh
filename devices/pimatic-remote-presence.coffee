@@ -24,7 +24,7 @@ module.exports = (env) ->
       #@mesh = @plugin.mesh.remotes[@config.remotePimatic].socket
       super()
 
-       @plugin.remotes[@remotePimatic].on @remoteDeviceId, (event) =>
+      @plugin.remotes[@remotePimatic].on @remoteDeviceId, (event) =>
         @emit event.attributeName, event.value
 
     getPresence: () ->
