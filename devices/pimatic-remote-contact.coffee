@@ -16,6 +16,7 @@ module.exports = (env) ->
       @name = @config.name
       @remotePimatic = @config.remotePimatic
       @remoteDevice = @config.remoteDeviceId
+      @_contact = lastState?.contact?.value or off
       super()
 
       @plugin.remotes[@remotePimatic].on @remoteDevice, (event) =>
@@ -25,7 +26,7 @@ module.exports = (env) ->
       return Promise.resolve @_contact
 
     setContact: (value) ->
-      @_base.debug 'set presence:', value
+      @_base.debug 'set contact:', value
 
       @plugin.remotes[@remotePimatic].action @remoteDevice, "contact", {
         contact: value

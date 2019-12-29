@@ -16,6 +16,7 @@ module.exports = (env) ->
       @name = @config.name
       @remotePimatic = @config.remotePimatic
       @remoteDevice = @config.remoteDeviceId
+      @_temperature = lastState?.temperature?.value or 0
       super()
 
       @plugin.remotes[@remotePimatic].on @remoteDeviceId, (event) =>

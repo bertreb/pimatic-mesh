@@ -16,7 +16,7 @@ module.exports = (env) ->
       @name = @config.name
       @remotePimatic = @config.remotePimatic
       @remoteDevice = @config.remoteDeviceId
-      #@mesh = @plugin.mesh.remotes[@config.remotePimatic].socket
+      @_presence = lastState?.presence?.value or off
       super()
 
       @plugin.remotes[@remotePimatic].on @remoteDeviceId, (event) =>

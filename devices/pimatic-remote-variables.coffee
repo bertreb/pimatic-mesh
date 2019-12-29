@@ -24,7 +24,7 @@ module.exports = (env) ->
           name = variable.name
           info = null
 
-          @values[variable.name] = lastState[variable.name].value
+          @values[variable.name] = lastState[variable.name]?.value or 0
 
           if @attributes[name]?
             throw new Error(

@@ -16,8 +16,8 @@ module.exports = (env) ->
       @name = @config.name
       @remotePimatic = @config.remotePimatic
       @remoteDevice = @config.remoteDeviceId
-      @_state = lastState.state.value
-      @_dimlevel = lastState.dimlevel.value
+      @_state = lastState?.state?.value or off
+      @_dimlevel = lastState?.dimlevel?.value or 0
 
       env.logger.info "@mesh: " + @mesh
       super()

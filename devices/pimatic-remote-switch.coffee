@@ -14,10 +14,9 @@ module.exports = (env) ->
       @_base.debug "initializing:", util.inspect(@config) if @debug
       @id = @config.id
       @name = @config.name
-      env.logger.info "lastState switch: " + JSON.stringify(lastState)
       @remotePimatic = @config.remotePimatic
       @remoteDevice = @config.remoteDeviceId
-      @_state = lastState.state.value
+      @_state = lastState?.state?.value or off
 
       super()
 
@@ -28,7 +27,7 @@ module.exports = (env) ->
       return Promise.resolve @_state
 
     changeStateTo: (newState) ->
-      @_base.debug 'state change requested to:', newState
+      @_base.debug 'state change to:', newState
 
       @plugin.remotes[@remotePimatic].action @remoteDevice, "changeStateTo", {
         state: newState
