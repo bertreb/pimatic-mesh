@@ -20,6 +20,7 @@ module.exports = (env) ->
       @actionCounter = 0
       @actionResultCallbacks = {}
       @attributeChangeCallbacks = {}
+      @remoteDevices = {}
       @connected = false
       @connectError = "connection closed"
 
@@ -57,6 +58,10 @@ module.exports = (env) ->
         @connected = false
         @connectError = error
 
+      @socket.on 'devices', (devices) =>
+        @base.debug "remote devices received"
+        @remoteDevices = devices
+
       @socket.on 'hello', (user) =>
         @base.debug 'hello', user
         if user.permissions? and not user.permissions.controlDevices
@@ -71,6 +76,9 @@ module.exports = (env) ->
         if @actionResultCallbacks.hasOwnProperty result.id
           @actionResultCallbacks[result.id].call @, result
           delete @actionResultCallbacks[result.id]
+
+    getDevices: () =>
+      return @remoteDevices
 
     _getActionId: () ->
       @actionCounter = 0 if @actionCounter > 100000

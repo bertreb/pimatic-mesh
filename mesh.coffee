@@ -69,9 +69,8 @@ module.exports = (env) ->
       # auto-discovery
       @framework.deviceManager.on('discover', (eventData) =>
         @framework.deviceManager.discoverMessage 'pimatic-mesh', 'Searching for devices'
-        #devices = @messenger.getDevices()
-        #env.logger.info "#{devices.length} devices discovered"
-        #        tbd
+        for key,remote of @remotes
+          env.logger.info "Remote '#{remote.pimaticId}', '#{_.size(remote.getDevices())}' devices discovered"
       )
 
       @framework.on 'destroy', () =>
