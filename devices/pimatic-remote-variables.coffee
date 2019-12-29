@@ -19,11 +19,10 @@ module.exports = (env) ->
       @_base = commons.base @, @config.class
       console.log "@debug", @debug
       @_base.debug "initializing:", util.inspect(@config) if @debug
-      #@mesh = @plugin.mesh.remotes[@config.remotePimatic].socket
-      #env.logger.info "socketID: " + @mesh.id
+      @remotePimatic = @config.remotePimatic
+      @remoteDevice = @config.remoteDeviceId
       @attributes = {}
       @values = {}
-      env.logger.info "lastState: " + JSON.stringify(lastState)
 
       for variable in @config.variables
         do (variable) =>
@@ -57,29 +56,14 @@ module.exports = (env) ->
             )
 
           super()
-          @plugin.mesh.on variable.remoteDeviceId, (_event) =>
-            #env.logger.info "var received: " + _event
+          @plugin.remotes[@remotePimatic].on variable.remoteDeviceId, (_event) =>
             variable = @findVariable(_event.deviceId, _event.attributeName)
             if variable?
               @values[variable.name] = _event.value
               @emit variable.name, @values[variable.name]
 
-
     findVariable: (deviceName, attributeName) =>
       _.find(@config.variables, (v) => deviceName is v.remoteDeviceId and attributeName is v.remoteAttributeId)
 
-    #getValue: () ->
-    #  return Promise.resolve @_state
-
-    ###
-    changeStateTo: (newState) ->
-      @_base.debug 'state change requested to:', newState
-
-      @plugin.messenger.action @config.remoteId, "changeStateTo", {
-        state: newState
-      }
-    ###
-
     destroy: () =>
-
       super()

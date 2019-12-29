@@ -19,10 +19,12 @@ module.exports = (env) ->
       @_base.debug "initializing:", util.inspect(@config) if @debug
       @id = @config.id
       @name = @config.name
+      @remotePimatic = @config.remotePimatic
+      @remoteDevice = @config.remoteDeviceId
       #@mesh = @plugin.mesh.remotes[@config.remotePimatic].socket
       super()
 
-      @plugin.mesh.on @config.remoteDeviceId, (event) =>
+       @plugin.remotes[@remotePimatic].on @remoteDeviceId, (event) =>
         @emit event.attributeName, event.value
 
     getPresence: () ->
@@ -31,7 +33,7 @@ module.exports = (env) ->
     setPresence: (value) ->
       @_base.debug 'set presence:', value
 
-      @plugin.mesh.action @config.remoteDeviceId, "presence", {
+      @plugin.remotes[@remotePimatic].action @remoteDeviceId, "presence", {
         state: value
       }
 

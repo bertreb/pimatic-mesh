@@ -20,13 +20,13 @@ module.exports = (env) ->
       @id = @config.id
       @name = @config.name
       env.logger.info "lastState switch: " + JSON.stringify(lastState)
+      @remotePimatic = @config.remotePimatic
+      @remoteDevice = @config.remoteDeviceId
       @_state = lastState.state.value
 
-      env.logger.info "remotePimatic: " + @remotePimatic
-      #@mesh = @plugin.mesh.remotes[@config.remotePimatic].socket
       super()
 
-      @plugin.mesh.on @config.remoteDeviceId, (event) =>
+      @plugin.remotes[@remotePimatic].on @remoteDevice, (event) =>
         @emit event.attributeName, event.value
 
     getState: () ->
@@ -35,7 +35,7 @@ module.exports = (env) ->
     changeStateTo: (newState) ->
       @_base.debug 'state change requested to:', newState
 
-      @plugin.mesh.action @config.remotePimatic, @config.remoteDeviceId, "changeStateTo", {
+      @plugin.remotes[@remotePimatic].action @remoteDevice, "changeStateTo", {
         state: newState
       }
 

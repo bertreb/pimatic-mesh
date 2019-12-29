@@ -19,10 +19,11 @@ module.exports = (env) ->
       @_base.debug "initializing:", util.inspect(@config) if @debug
       @id = @config.id
       @name = @config.name
-      #@mesh = @plugin.mesh.remotes[@config.remotePimatic].socket
+      @remotePimatic = @config.remotePimatic
+      @remoteDevice = @config.remoteDeviceId
       super()
 
-      @plugin.mesh.on @config.remoteDeviceId, (event) =>
+      @plugin.remotes[@remotePimatic].on @remoteDeviceId, (event) =>
         @emit event.attributeName, event.value
 
     getTemperature: () ->
@@ -31,7 +32,7 @@ module.exports = (env) ->
     setTemperature: (value) ->
       @_base.debug 'set temperature:', value
 
-      @plugin.mesh.action @config.remoteDeviceId, "temperature", {
+      @plugin.remotes[@remotePimatic].action @remoteDeviceId, "temperature", {
         temperature: value
       }
 

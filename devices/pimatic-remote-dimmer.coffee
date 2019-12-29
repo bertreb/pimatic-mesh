@@ -19,10 +19,15 @@ module.exports = (env) ->
       @_base.debug "initializing:", util.inspect(@config) if @debug
       @id = @config.id
       @name = @config.name
-      #@mesh = @plugin.mesh.remotes[@config.remotePimatic].socket
+      @remotePimatic = @config.remotePimatic
+      @remoteDevice = @config.remoteDeviceId
+      @_state = lastState.state.value
+      @_dimlevel = lastState.dimlevel.value
+
+      env.logger.info "@mesh: " + @mesh
       super()
 
-      @plugin.mesh.on @config.remoteDeviceId, (event) =>
+      @plugin.remotes[@remotePimatic].on @remoteDevice, (event) =>
         @emit event.attributeName, event.value
 
     getDimlevel: () ->
@@ -52,7 +57,7 @@ module.exports = (env) ->
     _setDimlevel: (level) =>
       @_dimlevel = level
       if level > 0 then @_state = 1 else @_state = 0
-      @plugin.mesh.action @config.remotePimatic, @config.remoteDeviceId, "changeDimlevelTo", {
+      @plugin.remotes[@remotePimatic].action @remoteDevice, "changeDimlevelTo", {
         dimlevel: level
       }
 

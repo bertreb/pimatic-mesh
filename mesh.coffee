@@ -2,7 +2,7 @@
 module.exports = (env) ->
 
   _ = env.require 'lodash'
-  Mesh = require('./mesh-connections')(env)
+  Mesh = require('./mesh-connection')(env)
   commons = require('pimatic-plugin-commons')(env)
   deviceConfigTemplates = {
     "switch": {
@@ -41,7 +41,11 @@ module.exports = (env) ->
   class PimaticMeshPlugin extends env.plugins.Plugin
 
     init: (app, @framework, @config) =>
-      @mesh = new Mesh(@config, @)
+      
+      @remotes = {}
+      for remoteConfig in @config.remotes
+        @remotes[remoteConfig.id] = new Mesh(remoteConfig, @)
+        env.logger.info "remote: " + remoteConfig.id + " added, aantal remotes: " + _.size(@remotes)
       @debug = @config.debug || false
       @base = commons.base @, 'Plugin'
       @varMgr = @framework.variableManager

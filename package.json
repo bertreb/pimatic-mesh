@@ -8,7 +8,7 @@
   "main": "mesh",
   "files": [
     "mesh.coffee",
-    "mesh-connections.coffee",
+    "mesh-connection.coffee",
     "mesh-config-schema.coffee",
     "device-config-schema.coffee",
     "devices/mesh-contact",
