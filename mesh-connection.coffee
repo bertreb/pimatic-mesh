@@ -98,3 +98,8 @@ module.exports = (env) ->
         else
             reject "Connection to remote peer failed: #{@connectError}"
 
+    destroy: () =>
+      @socket.close()
+      @socket.removeAllListeners()
+      super()
+

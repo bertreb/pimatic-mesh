@@ -74,6 +74,11 @@ module.exports = (env) ->
         #        tbd
       )
 
+      @framework.on 'destroy', () =>
+        env.logger.debug "Close remote sockets and remove all listeners"
+        for remote in @remotes
+          remote.destroy()
+
   # ###Finally
   # Create a instance of plugin
   return new PimaticMeshPlugin
