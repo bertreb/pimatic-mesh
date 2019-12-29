@@ -11,12 +11,12 @@
     "mesh-connection.coffee",
     "mesh-config-schema.coffee",
     "device-config-schema.coffee",
-    "devices/pimatic-mesh-contact",
-    "devices/pimatic-mesh-dimmer",
-    "devices/pimatic-mesh-switch",
-    "devices/pimatic-mesh-variables",
-    "devices/pimatic-mesh-temperature",
-    "devices/pimatic-mesh-presence",
+    "devices/pimatic-mesh-contact.coffee",
+    "devices/pimatic-mesh-dimmer.coffee",
+    "devices/pimatic-mesh-switch.coffee",
+    "devices/pimatic-mesh-variables.coffee",
+    "devices/pimatic-mesh-temperature.coffee",
+    "devices/pimatic-mesh-presence.coffee",
     "LICENSE",
     "HISTORY.md",
     "README.md"
@@ -25,7 +25,7 @@
     "meshing",
     "Pimatic"
   ],
-  "version": "0.1.1",
+  "version": "0.1.2",
   "homepage": "https://github.com/bertreb/pimatic-mesh/tree/master",
   "private": false,
   "bugs": {
