@@ -21,7 +21,7 @@ The Pimatic remote systems can be configured in the plugin config. Per remote yo
 }
 ```
 
-Per mesh device you can choose which remote Pimatic system will be used (via the 'id').
+Per mesh device you can choose which remote Pimatic system will be used (via the 'id'). After adding, changing or removing remote Pimatic systems in the plugin config, you need to restart Pimatic.
 
 The supported mesh devices are switch, contact, dimmer, presence, temperature and variable. The remote switch and dimmer can be controlled from the switch and dimmer mesh device. From all devices you get data like state, level, etc, depending on the device type.
 Variables from remote devices can be obtained via the mesh variables device.

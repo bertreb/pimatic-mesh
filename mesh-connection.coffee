@@ -23,11 +23,12 @@ module.exports = (env) ->
       @remoteDevices = {}
       @connected = false
       @connectError = "connection closed"
+      @connectRetries = 0
 
       @socket = io url.resolve @baseUrl, '/?username=' + @username + '&password=' + @password, {
         reconnection: true,
         reconnectionDelay: 5000,
-        reconnectionDelayMax: 10000,
+        reconnectionDelayMax: 7000,
         timeout: 20000,
         forceNew: true
       }
@@ -49,14 +50,23 @@ module.exports = (env) ->
         @connectError = "connection remote '#{@pimaticId} closed" if @connectError?
 
       @socket.on 'connect_error', (error) =>
-        @base.error "connection attempt to remote '#{@pimaticId}' failed" #, error
+        @connectRetries++
+        @base.error "connection attempt #{@connectRetries} to remote '#{@pimaticId}' failed" #, error
         @connected = false
         @connectError = error
+        if @connectRetries >= 10
+          @socket.close()
+          reconnectTimer = () =>
+            @connectRetries = 0
+            @socket.open()
+          @base.debug "After #{@connectRetries} attempts, waiting 5 minutes before reconnecting to #{@pimaticId}"
+          @reconTimer = setTimeout(reconnectTimer,300000) # 5 minutes
 
       @socket.on 'error', (error) =>
         @base.error "connection to remote '#{@pimaticId}' failed" # , error
         @connected = false
         @connectError = error
+
 
       @socket.on 'devices', (devices) =>
         @base.debug "remote devices received from '#{@pimaticId}'"
@@ -109,5 +119,6 @@ module.exports = (env) ->
     destroy: () =>
       @socket.close()
       @socket.removeAllListeners()
+      if @reconTimer? then clearTimeout(@reconTimer)
       super()
 
