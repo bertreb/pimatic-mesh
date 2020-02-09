@@ -19,9 +19,9 @@ module.exports = (env) ->
       @pimaticId = @config.id
       @actionCounter = 0
       @actionResultCallbacks = {}
+      @connected = false
       @attributeChangeCallbacks = {}
       @remoteDevices = {}
-      @connected = false
       @connectError = "connection closed"
       @connectRetries = 0
 
@@ -79,7 +79,8 @@ module.exports = (env) ->
  
       
       @socket.on 'deviceAttributeChanged', (attrEvent) =>
-        #env.logger.info "deviceATtrChanged: " + JSON.stringify(attrEvent,null,2)
+        #if (attrEvent.deviceId).indexOf("<debug string>") >=0
+        #  env.logger.info "deviceAttrChanged: " + JSON.stringify(attrEvent,null,2)
         @emit attrEvent.deviceId, attrEvent
 
       @socket.on 'callResult', (result) =>

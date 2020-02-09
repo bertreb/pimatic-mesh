@@ -15,8 +15,9 @@ module.exports = (env) ->
       @id = @config.id
       @name = @config.name
       @remotePimatic = @config.remotePimatic
-      @remoteDevice = @config.remoteDeviceId
+      @remoteDeviceId = @config.remoteDeviceId
       @_presence = lastState?.presence?.value or off
+
       super()
 
       @plugin.remotes[@remotePimatic].on @remoteDeviceId, (event) =>
@@ -25,11 +26,10 @@ module.exports = (env) ->
     getPresence: () ->
       return Promise.resolve @_presence
 
-    setPresence: (value) ->
+    changePresenceTo: (value) ->
       @_base.debug 'set presence:', value
-
-      @plugin.remotes[@remotePimatic].action @remoteDeviceId, "presence", {
-        state: value
+      @plugin.remotes[@remotePimatic].action @remoteDeviceId, "changePresenceTo", {
+        presence: value
       }
 
     destroy: () =>

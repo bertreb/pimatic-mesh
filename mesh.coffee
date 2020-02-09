@@ -41,7 +41,7 @@ module.exports = (env) ->
   class PimaticMeshPlugin extends env.plugins.Plugin
 
     init: (app, @framework, @config) =>
-      
+
       @remotes = {}
       @enumRemotes = []
       for remoteConfig in @config.remotes
@@ -73,14 +73,61 @@ module.exports = (env) ->
       @framework.deviceManager.on('discover', (eventData) =>
         @framework.deviceManager.discoverMessage 'pimatic-mesh', 'Searching for devices'
         for key,remote of @remotes
-          env.logger.info "Mesh'#{remote.pimaticId}', '#{_.size(remote.getDevices())}' devices discovered"
+          devices = remote.getDevices()
+          for i, device of devices
+            switch @isInstanceOf(device)
+              when "switch"
+                addDeviceToDiscovery("switch", device, key)
+              when "dimmer"
+                addDeviceToDiscovery("dimmer", device, key)
+              when "presence"
+                addDeviceToDiscovery("presence", device, key)
+              when "contact"
+                addDeviceToDiscovery("contact", device, key)
+              when "temperature"
+                addDeviceToDiscovery("temperature", device, key)
+
+              else
+                #env.logger.info 'instance not yet defined'
       )
+
+      addDeviceToDiscovery = (meshClass, device, key) =>
+        config =
+          class: deviceConfigTemplates[meshClass].class
+          name: "[" + key + "] "  + device.config.name
+          id: "_" + key + "_" + device.config.id
+          remotePimatic: key
+          remoteDeviceId: device.config.id
+        if not @inConfig(config.id, config.class)
+          @framework.deviceManager.discoveredDevice( 'pimatic-mesh ', "[#{config.remotePimatic}] #{device.config.id}", config )
 
       @framework.on 'destroy', () =>
         env.logger.debug "Close remote sockets and remove all listeners"
         for remote in @remotes
           remote.destroy()
 
-  # ###Finally
-  # Create a instance of plugin
+    inConfig: (deviceID, className) =>
+      deviceID = parseInt(deviceID)
+      for device in @framework.deviceManager.devicesConfig
+        if parseInt(device.deviceID) is deviceID and device.class is className
+          env.logger.debug("device "+deviceID+" ("+className+") already exists")
+          return true
+      return false
+
+    isInstanceOf: (device) =>
+      if device.config.class is "MilightRGBWZone" or device.config.class is "MilightFullColorZone"
+        return "dimmer"
+      else if (device.config.class).indexOf("Dimmer") >= 0
+        return "dimmer"
+      else if (device.config.class).indexOf("Switch") >= 0
+        return "switch"
+      else if (device.config.class).indexOf("Presence") >= 0
+        return "presence"
+      else if ((device.config.class).toLowerCase()).indexOf("contact") >= 0
+        return "contact"
+      else if _.find(device.attributes,(a) => (a.name.toLowerCase()).indexOf("temp") >= 0)
+        return "temperature"
+      else
+        return "unknown"
+
   return new PimaticMeshPlugin

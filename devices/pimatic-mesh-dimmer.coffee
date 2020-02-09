@@ -15,13 +15,13 @@ module.exports = (env) ->
       @id = @config.id
       @name = @config.name
       @remotePimatic = @config.remotePimatic
-      @remoteDevice = @config.remoteDeviceId
+      @remoteDeviceId = @config.remoteDeviceId
       @_state = lastState?.state?.value or off
       @_dimlevel = lastState?.dimlevel?.value or 0
 
       super()
 
-      @plugin.remotes[@remotePimatic].on @remoteDevice, (event) =>
+      @plugin.remotes[@remotePimatic].on @remoteDeviceId, (event) =>
         @emit event.attributeName, event.value
 
     getDimlevel: () ->
@@ -51,7 +51,7 @@ module.exports = (env) ->
     _setDimlevel: (level) =>
       @_dimlevel = level
       if level > 0 then @_state = 1 else @_state = 0
-      @plugin.remotes[@remotePimatic].action @remoteDevice, "changeDimlevelTo", {
+      @plugin.remotes[@remotePimatic].action @remoteDeviceId, "changeDimlevelTo", {
         dimlevel: level
       }
 

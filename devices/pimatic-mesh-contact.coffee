@@ -15,20 +15,19 @@ module.exports = (env) ->
       @id = @config.id
       @name = @config.name
       @remotePimatic = @config.remotePimatic
-      @remoteDevice = @config.remoteDeviceId
+      @remoteDeviceId = @config.remoteDeviceId
       @_contact = lastState?.contact?.value or off
       super()
 
-      @plugin.remotes[@remotePimatic].on @remoteDevice, (event) =>
+      @plugin.remotes[@remotePimatic].on @remoteDeviceId, (event) =>
         @emit event.attributeName, event.value
 
     getContact: () ->
       return Promise.resolve @_contact
 
-    setContact: (value) ->
+    changeContactTo: (value) ->
       @_base.debug 'set contact:', value
-
-      @plugin.remotes[@remotePimatic].action @remoteDevice, "contact", {
+      @plugin.remotes[@remotePimatic].action @remoteDeviceId, "changeContactTo", {
         contact: value
       }
 
