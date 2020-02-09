@@ -86,9 +86,8 @@ module.exports = (env) ->
                 addDeviceToDiscovery("contact", device, key)
               when "temperature"
                 addDeviceToDiscovery("temperature", device, key)
-
               else
-                #env.logger.info 'instance not yet defined'
+                env.logger.debug 'instance not yet defined'
       )
 
       addDeviceToDiscovery = (meshClass, device, key) =>
