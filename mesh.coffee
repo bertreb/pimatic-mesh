@@ -59,7 +59,7 @@ module.exports = (env) ->
           className = device.class
           # convert camel-case classname to kebap-case filename
           filename = className.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
-          env.logger.info "classType: " + './devices/' + filename
+          env.logger.debug "classType: " + './devices/' + filename
           classType = require('./devices/' + filename)(env)
           @base.debug "Registering device class #{className}"
           deviceConfigDef[className].properties.remotePimatic["enum"] = @enumRemotes
