@@ -42,7 +42,6 @@ module.exports = (env) ->
       super()
 
       @plugin.remotes[@remotePimatic].on @remoteDeviceId, (event) =>
-        env.logger.info "event: " + JSON.stringify(event)
         @emit event.attributeName, event.value
 
     getTemperature: () ->
