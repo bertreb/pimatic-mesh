@@ -59,3 +59,7 @@ Now you created a mesh device with the id "air-quality" and the attributes "pm10
 The pm10 and pm25 data will come from the remote system and will become visible as soon as the remote systems values change.
 
 The **Discover Devices** function is available for Switches and Dimmers actuators and for Temperature/Humidity, Contact and Presence Sensors.
+----
+The plugin is Node v10 compatible and in development.
+
+You could backup Pimatic before you are using this plugin!
