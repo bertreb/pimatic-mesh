@@ -113,7 +113,7 @@ module.exports = (env) ->
           deviceAttributes.push deviceAttribute
         config["variables"] = deviceAttributes
         if not @inConfig(config.id, config.class)
-          @framework.deviceManager.discoveredDevice( 'pimatic-mesh-variables ', "[#{config.remotePimatic}] #{device.config.id}", config )
+          @framework.deviceManager.discoveredDevice( 'mesh-variables ', "[#{config.remotePimatic}] #{device.config.id}", config )
 
       addDeviceToDiscovery = (meshClass, device, key) =>
         config =
@@ -123,7 +123,7 @@ module.exports = (env) ->
           remotePimatic: key
           remoteDeviceId: device.config.id
         if not @inConfig(config.id, config.class)
-          @framework.deviceManager.discoveredDevice( 'pimatic-mesh ', "[#{config.remotePimatic}] #{device.config.id}", config )
+          @framework.deviceManager.discoveredDevice( 'mesh-'+meshClass+' ', "[#{config.remotePimatic}] #{device.config.id}", config )
 
 
       @framework.on 'destroy', () =>
