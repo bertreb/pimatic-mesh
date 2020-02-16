@@ -7,6 +7,7 @@
 * 20200209, v0.1.8
   * Added Discovery of Devices
   * some fixes
-* 20200216, v0.1.10
+* 20200216, v0.1.11
   * Added Discovery of all Variables grouped per device
   * Added classname in discovery label
+  * Added boolean type variables device

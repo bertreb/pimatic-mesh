@@ -95,7 +95,7 @@ module.exports = {
               description: "The type of the variable."
               type: "string"
               default: "string"
-              enum: ["string", "number"]
+              enum: ["string", "number", "boolean"]
             unit:
               description: "The unit of the variable. Only works if type is a number."
               type: "string"
