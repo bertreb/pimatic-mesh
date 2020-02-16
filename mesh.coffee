@@ -88,17 +88,43 @@ module.exports = (env) ->
                 addDeviceToDiscovery("temperature", device, key)
               else
                 env.logger.debug 'instance not yet defined'
+          #variables = remote.getVariables()
+          for i, device of devices
+            addVariableToDiscovery(device, key)
       )
+
+      addVariableToDiscovery = (device, key) =>
+        config =
+          class: deviceConfigTemplates["variables"].class
+          name: "[" + key + "] "  + device.name
+          id: key + "_" + device.id
+          remotePimatic: key
+        deviceAttributes = []
+        for key, attr of device.attributes
+          cleanUnit = if attr.unit? then (attr.unit).replace("\u00C2","") else ""
+          deviceAttribute =
+            name: attr.name
+            type: attr.type
+            remoteDeviceId: device.id
+            remoteAttributeId: attr.name
+            unit: cleanUnit
+            label: attr.label ? ""
+            acronym: attr.acronym ? ""
+          deviceAttributes.push deviceAttribute
+        config["variables"] = deviceAttributes
+        if not @inConfig(config.id, config.class)
+          @framework.deviceManager.discoveredDevice( 'pimatic-mesh-variables ', "[#{config.remotePimatic}] #{device.config.id}", config )
 
       addDeviceToDiscovery = (meshClass, device, key) =>
         config =
           class: deviceConfigTemplates[meshClass].class
           name: "[" + key + "] "  + device.config.name
-          id: "_" + key + "_" + device.config.id
+          id: key + "_" + device.config.id
           remotePimatic: key
           remoteDeviceId: device.config.id
         if not @inConfig(config.id, config.class)
           @framework.deviceManager.discoveredDevice( 'pimatic-mesh ', "[#{config.remotePimatic}] #{device.config.id}", config )
+
 
       @framework.on 'destroy', () =>
         env.logger.debug "Close remote sockets and remove all listeners"
