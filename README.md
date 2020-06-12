@@ -58,7 +58,7 @@ You create a mesh variables device with the following config.
 Now you created a mesh device with the id "air-quality" and the attributes "pm10" and "pm25".
 The pm10 and pm25 data will come from the remote system and will become visible as soon as the remote systems values change.
 
-The **Discover Devices** function is available for the devices Switch and Dimmer actuators and for Contact and Presence Sensors.
+The **Discover Devices** function is available for the devices Switch, Dimmer and Buttons Devices and Contact and Presence Sensors.
 Also all variables will be discovered. Per remote device a MeshVariablesDevice is presented with the all the attributes of that remote device.
 
 There can be overlap in getting remote values. For example if you want the temperature/humidity of a remote sensor you can use the MeshTemperatureDevice or the MeshVariablesDevice.
