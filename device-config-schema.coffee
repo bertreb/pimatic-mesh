@@ -4,7 +4,7 @@ module.exports = {
     title: "Mesh Switch"
     description: "Mesh SwitchDevice"
     type: "object"
-    extensions: ["xLink", "xOnLabel", "xOffLabel"]
+    extensions: ["xLink", "xConfirm", "xOnLabel", "xOffLabel"]
     properties:
       remotePimatic:
         description: "The id of the remote Pimatic"
@@ -38,6 +38,39 @@ module.exports = {
       remoteDeviceId:
         description: "The id of the remote contact sensor"
         type: "string"
+  },
+  PimaticMeshButtons: {
+    title: "Mesh Buttons"
+    description: "Mesh ButtonsDevice"
+    type: "object"
+    extensions: ["xLink"]
+    properties:
+      remotePimatic:
+        description: "The id of the remote Pimatic"
+        type: "string"
+      remoteDeviceId:
+        description: "The id of the remote buttons device"
+        type: "string"
+      enableActiveButton:
+        description: "Highlight last pressed button if enabled"
+        type: "boolean"
+        default: true
+      buttons:
+        description: "Buttons to display"
+        type: "array"
+        default: []
+        format: "table"
+        items:
+          type: "object"
+          properties:
+            id:
+              type: "string"
+            text:
+              type: "string"
+            confirm:
+              description: "Ask the user to confirm the button press"
+              type: "boolean"
+              default: false
   },
   PimaticMeshTemperature: {
     title: "Mesh TemperatureDevice"

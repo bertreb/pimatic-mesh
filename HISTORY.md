@@ -11,3 +11,6 @@
   * Added Discovery of all Variables grouped per device
   * Added classname in discovery label
   * Added boolean type variables device
+* 20200216, v0.2.0
+  * Added buttons device
+  * Added copy of 'x' settings of remote device

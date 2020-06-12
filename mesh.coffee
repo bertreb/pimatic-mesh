@@ -20,6 +20,11 @@ module.exports = (env) ->
       name: "Mesh Contact "
       class: "PimaticMeshContact"
     },
+    "buttons": {
+      id: "mesh-buttons-"
+      name: "Mesh Button "
+      class: "PimaticMeshButtons"
+    },
     "temperature": {
       id: "mesh-temperature-"
       name: "Mesh Temperature "
@@ -86,6 +91,8 @@ module.exports = (env) ->
                 addDeviceToDiscovery("contact", device, key)
               when "temperature"
                 addDeviceToDiscovery("temperature", device, key)
+              when "buttons"
+                addDeviceToDiscovery("buttons", device, key)
               else
                 env.logger.debug 'instance not yet defined'
           #variables = remote.getVariables()
@@ -122,9 +129,21 @@ module.exports = (env) ->
           id: key + "_" + device.config.id
           remotePimatic: key
           remoteDeviceId: device.config.id
+        config["buttons"] = device.config.buttons if device.config.buttons?
+        config["xConfirm"] = device.config.xConfirm if device.config.xConfirm?
+        config["xLink"] = device.config.xLink if device.config.xLink?
+        config["xOnLabel"] = device.config.xOnLabel if device.config.xOnLabel?
+        config["xOffLabel"] = device.config.xOffLabel if device.config.xOffLabel?
+        config["xPresentLabel"] = device.config.xPresentLabel if device.config.xPresentLabel?
+        config["xAbsentLabel"] = device.config.xAbsentLabel if device.config.xAbsentLabel?
+        config["xClosedLabel"] = device.config.xClosedLabel if device.config.xClosedLabel?
+        config["xOpenedLabel"] = device.config.xOpenedLabel if device.config.xOpenedLabel?
+        config["xAttributeOptions"] = device.config.xAttributeOptions if device.config.xAttributeOptions?
+
+        env.logger.debug "Remote Device.config: " + JSON.stringify(device.config,null,2)
+
         if not @inConfig(config.id, config.class)
           @framework.deviceManager.discoveredDevice( 'mesh-'+meshClass+' ', "[#{config.remotePimatic}] #{device.config.id}", config )
-
 
       @framework.on 'destroy', () =>
         env.logger.debug "Close remote sockets and remove all listeners"
@@ -148,6 +167,8 @@ module.exports = (env) ->
         return "switch"
       else if (device.config.class).indexOf("Presence") >= 0
         return "presence"
+      else if ((device.config.class).toLowerCase()).indexOf("buttons") >= 0
+        return "buttons"
       else if ((device.config.class).toLowerCase()).indexOf("contact") >= 0
         return "contact"
       else if _.find(device.attributes,(a) => (a.name.toLowerCase()).indexOf("temp") >= 0)
