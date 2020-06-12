@@ -17,6 +17,7 @@
     "devices/pimatic-mesh-variables.coffee",
     "devices/pimatic-mesh-temperature.coffee",
     "devices/pimatic-mesh-presence.coffee",
+    "devices/pimatic-mesh-buttons.coffee",
     "LICENSE",
     "HISTORY.md",
     "README.md"
@@ -25,7 +26,7 @@
     "meshing",
     "Pimatic"
   ],
-  "version": "0.2.0",
+  "version": "0.2.1",
   "homepage": "https://github.com/bertreb/pimatic-mesh/tree/master",
   "private": false,
   "bugs": {

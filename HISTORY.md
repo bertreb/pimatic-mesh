@@ -14,3 +14,5 @@
 * 20200216, v0.2.0
   * Added buttons device
   * Added copy of 'x' settings of remote device
+* 20200216, v0.2.1
+  * Added buttons device
