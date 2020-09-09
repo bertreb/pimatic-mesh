@@ -16,5 +16,5 @@
   * Added copy of 'x' settings of remote device
 * 20200216, v0.2.1
   * Added buttons device
-* 20200909, v0.2.2
+* 20200909, v0.2.3
   * Small edits

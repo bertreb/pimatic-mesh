@@ -54,7 +54,7 @@ module.exports = (env) ->
           @plugin.remotes[@remotePimatic].on variable.remoteDeviceId, (_event) =>
             _variable = @findVariable(_event.deviceId, _event.attributeName)
             if _variable?
-              env.loger.debug "Variable update " + _variable.name + " : " + _variable.value
+              env.logger.debug "Variable update " + _variable.name + " : " + _variable.value
               @values[_variable.name] = _event.value
               @emit _variable.name, @values[_variable.name]
 
